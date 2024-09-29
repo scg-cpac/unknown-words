@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+import os
 
 # Default prompt template
 DEFAULT_PROMPT_TEMPLATE = """Act as a risk management expert familiar with Thailand’s legal, environmental, and regulatory frameworks, as well as global terminologies. Analyze the following text for any specialized, technical, or less commonly known terms. Extract these words and organize them into a table with two columns:
@@ -85,7 +86,7 @@ def main():
                 # Create a button to start the analysis
                 if st.button("Analyze Selected Text with AI"):
                     # Initialize OpenAI API through LangChain
-                    openai_api_key = ""  # Ensure you add your API key to Streamlit secrets
+                    openai_api_key = os.environ.get('OPENAI_API_KEY')  # Ensure you add your API key to Streamlit secrets
                     if not openai_api_key:
                         st.error("Please set your OpenAI API key.")
                         return
